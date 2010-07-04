@@ -1,0 +1,53 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Install, uninstall and update for the user_expire module.
+ */
+
+/**
+ * Implementation of hook_schema().
+ */
+function user_expire_schema() {
+  $schema['user_expire'] = array(
+    'description' => t('Expiration time for users.'),
+    'fields' => array(
+      'uid' => array(
+        'type' => int,
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t('The {user}.uid.'),
+      ),
+      'expire' => array(
+        'type' => int,
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => t('A Unix timestamp that user has been expired.'),
+      ),
+    ),
+    'primary key' => array(
+      'uid',
+    ),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function user_expire_install() {
+  drupal_install_schema('user_expire');
+}
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function user_expire_uninstall() {
+  variable_del('user_expire_default_date');
+  drupal_uninstall_schema('user_expire');
+}
+

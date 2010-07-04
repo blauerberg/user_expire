@@ -1,0 +1,5 @@
+; $Id$
+name = User Expire
+description = Provides settings of expiration for users.
+core = 6.x
+version = 6.x-1.1
